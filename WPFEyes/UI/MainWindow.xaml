@@ -1,0 +1,17 @@
+﻿<Window x:Class="WPFEyes.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ui="clr-namespace:WPFEyes.UI"
+        Title="MainWindow" Height="200" Width="400">
+
+    <Window.Resources>
+        <ResourceDictionary Source="Constants.xaml" />
+    </Window.Resources>
+
+    <Viewbox Stretch="Fill">
+        <StackPanel Orientation="Horizontal">
+            <ui:Eye Width="{StaticResource Extension}" Height="{StaticResource Extension}"></ui:Eye>
+            <ui:Eye Width="{StaticResource Extension}" Height="{StaticResource Extension}"></ui:Eye>
+        </StackPanel>
+        
+    </Viewbox>
+</Window>
