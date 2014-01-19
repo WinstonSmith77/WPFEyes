@@ -10,7 +10,10 @@
         <ResourceDictionary Source="Constants.xaml" />
     </UserControl.Resources>
 
-    <Canvas>
-        <Ellipse Stroke="Black" StrokeThickness="{StaticResource StrokeWidth}"  Width="{StaticResource Extension}" Height="{StaticResource Extension}" ></Ellipse>
-    </Canvas>
+    <Grid>
+        <Canvas>
+            <Ellipse Stroke="Black" StrokeThickness="{StaticResource StrokeWidth}"  Width="{StaticResource Extension}" Height="{StaticResource Extension}" ></Ellipse>
+        </Canvas>
+        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Info}" ></TextBlock>
+    </Grid>
 </UserControl>
