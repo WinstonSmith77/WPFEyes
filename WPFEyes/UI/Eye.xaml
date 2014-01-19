@@ -13,6 +13,12 @@
     <Grid>
         <Canvas>
             <Ellipse Stroke="Black" StrokeThickness="{StaticResource StrokeWidth}"  Width="{StaticResource Extension}" Height="{StaticResource Extension}" ></Ellipse>
+            <Ellipse Stroke="Black" StrokeThickness="{StaticResource StrokeWidth}"  Width="{StaticResource ExtensionInnerEye}" Height="{StaticResource ExtensionInnerEye}" >
+                <Ellipse.RenderTransform>
+                    <TranslateTransform X="{Binding OffsetXInnerEye}"  Y="{Binding OffsetXInnerEye}"></TranslateTransform>
+                </Ellipse.RenderTransform>
+                
+            </Ellipse>
         </Canvas>
         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Info}" ></TextBlock>
     </Grid>

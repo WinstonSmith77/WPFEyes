@@ -3,4 +3,5 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <sys:Double x:Key="StrokeWidth">10</sys:Double>
     <sys:Double x:Key="Extension">100</sys:Double>
+    <sys:Double x:Key="ExtensionInnerEye">20</sys:Double>
 </ResourceDictionary>

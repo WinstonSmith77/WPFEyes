@@ -1,19 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace WPFEyes.UI
@@ -23,37 +10,73 @@ namespace WPFEyes.UI
     /// </summary>
     public partial class Eye : UserControl
     {
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool GetCursorPos(ref Win32Point pt);
-
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct Win32Point
-        {
-            public Int32 X;
-            public Int32 Y;
-        };
-        public static Point GetMousePositionOnScreen()
-        {
-            Win32Point w32Mouse = new Win32Point();
-            GetCursorPos(ref w32Mouse);
-            return new Point(w32Mouse.X, w32Mouse.Y);
-        }
-
 
         public Eye()
         {
             InitializeComponent();
             DataContext = this;
 
-            var timer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(50), IsEnabled = true};
+            var timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(50), IsEnabled = true };
             timer.Tick += timer_Tick;
+
+
+            var extension = (double)FindResource("Extension");
+            Center = new Point(extension / 2, extension / 2);
+
+            var extensionInnerEye = (double)FindResource("ExtensionInnerEye");
+            OffsetXInnerEye = Center.X - extensionInnerEye / 2;
+            OffsetYInnerEye = Center.Y - extensionInnerEye / 2;
         }
 
         void timer_Tick(object sender, EventArgs e)
         {
-            Info =  GetMousePositionOnScreen().ToString();
+            var mouseOnScreen = Win32.GetMousePositionOnScreen();
+            var centerOnScreen = PointToScreen(Center);
+
+            mouseOnScreen.Offset(-centerOnScreen.X, -centerOnScreen.Y);
+
+            Info = mouseOnScreen.ToString();
         }
+
+
+
+
+        public Point Center
+        {
+            get { return (Point)GetValue(CenterProperty); }
+            set { SetValue(CenterProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Center.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CenterProperty =
+            DependencyProperty.Register("Center", typeof(Point), typeof(Eye), new PropertyMetadata(new Point()));
+
+
+
+
+        public double OffsetXInnerEye
+        {
+            get { return (double)GetValue(OffsetXInnerEyeProperty); }
+            set { SetValue(OffsetXInnerEyeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for OffsetXInnerEye.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty OffsetXInnerEyeProperty =
+            DependencyProperty.Register("OffsetXInnerEye", typeof(double), typeof(Eye), new PropertyMetadata(0.0));
+
+        public double OffsetYInnerEye
+        {
+            get { return (double)GetValue(OffsetYInnerEyeProperty); }
+            set { SetValue(OffsetYInnerEyeProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for OffsetXInnerEye.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty OffsetYInnerEyeProperty =
+            DependencyProperty.Register("OffsetYInnerEye", typeof(double), typeof(Eye), new PropertyMetadata(0.0));
+
+
+
+
 
         public string Info
         {
@@ -65,6 +88,6 @@ namespace WPFEyes.UI
         public static readonly DependencyProperty InfoProperty =
             DependencyProperty.Register("Info", typeof(string), typeof(Eye), new PropertyMetadata(String.Empty));
 
-        
+
     }
 }
