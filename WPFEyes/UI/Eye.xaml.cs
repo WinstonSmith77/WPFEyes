@@ -10,6 +10,9 @@ namespace WPFEyes.UI
     /// </summary>
     public partial class Eye : UserControl
     {
+        private const int _maxOffset = 1000;
+        private readonly double _extension;
+        private readonly double _extensionInnerEye;
 
         public Eye()
         {
@@ -20,12 +23,12 @@ namespace WPFEyes.UI
             timer.Tick += timer_Tick;
 
 
-            var extension = (double)FindResource("Extension");
-            Center = new Point(extension / 2, extension / 2);
+            _extension = (double)FindResource("Extension");
+            Center = new Point(_extension / 2, _extension / 2);
 
-            var extensionInnerEye = (double)FindResource("ExtensionInnerEye");
-            OffsetXInnerEye = Center.X - extensionInnerEye / 2;
-            OffsetYInnerEye = Center.Y - extensionInnerEye / 2;
+            _extensionInnerEye = (double)FindResource("ExtensionInnerEye");
+            OffsetXInnerEye = Center.X - _extensionInnerEye / 2;
+            OffsetYInnerEye = Center.Y - _extensionInnerEye / 2;
         }
 
         void timer_Tick(object sender, EventArgs e)
@@ -33,9 +36,23 @@ namespace WPFEyes.UI
             var mouseOnScreen = Win32.GetMousePositionOnScreen();
             var centerOnScreen = PointToScreen(Center);
 
-            mouseOnScreen.Offset(-centerOnScreen.X, -centerOnScreen.Y);
+            var offset = mouseOnScreen;
+            offset.Offset(-centerOnScreen.X, -centerOnScreen.Y);
 
-            Info = mouseOnScreen.ToString();
+            var angle = Math.Atan2(offset.Y, offset.X);
+            var length = Math.Sqrt(offset.X * offset.X + offset.Y * offset.Y);
+
+            length = Math.Min(Math.Abs(length), _maxOffset) * Math.Sign(length);
+
+            length *= _extension / _maxOffset;
+           // length = 0;
+
+            offset = new Point(Math.Cos(angle) * length, Math.Sin(angle) * length);
+
+            OffsetXInnerEye = Center.X + offset.X - _extensionInnerEye / 2;
+            OffsetYInnerEye = Center.Y + offset.Y - _extensionInnerEye / 2;
+
+            Info = offset.ToString();
         }
 
 
