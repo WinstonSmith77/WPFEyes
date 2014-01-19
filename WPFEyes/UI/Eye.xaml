@@ -13,13 +13,24 @@
     <Grid>
         <Canvas>
             <Ellipse Stroke="Black" StrokeThickness="{StaticResource StrokeWidth}"  Width="{StaticResource Extension}" Height="{StaticResource Extension}" ></Ellipse>
-            <Ellipse Stroke="Black" StrokeThickness="{StaticResource StrokeWidth}"  Width="{StaticResource ExtensionInnerEye}" Height="{StaticResource ExtensionInnerEye}" >
-                <Ellipse.RenderTransform>
+           
+            <Canvas>
+                <Canvas.RenderTransform>
                     <TranslateTransform X="{Binding OffsetXInnerEye}"  Y="{Binding OffsetYInnerEye}"></TranslateTransform>
-                </Ellipse.RenderTransform>
-                
-            </Ellipse>
+                </Canvas.RenderTransform>
+                <Ellipse Stroke="Black" StrokeThickness="{StaticResource StrokeWidth}"  Width="{StaticResource ExtensionInnerEye}" Height="{StaticResource ExtensionInnerEye}" >
+                   
+                </Ellipse>
+
+                <Ellipse Fill="DeepSkyBlue"  Width="{StaticResource ExtensionBlue}" Height="{StaticResource ExtensionBlue}" >
+                    <Ellipse.RenderTransform>
+                        <TranslateTransform X="{Binding OffsetBlue}"  Y="{Binding OffsetBlue}"></TranslateTransform>
+                    </Ellipse.RenderTransform>
+                </Ellipse>
+            </Canvas>
+            
+           
         </Canvas>
-        <TextBlock Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Info}" ></TextBlock>
+        <!--<TextBlock Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Info}" ></TextBlock>-->
     </Grid>
 </UserControl>
