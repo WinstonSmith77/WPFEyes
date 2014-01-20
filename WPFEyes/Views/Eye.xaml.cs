@@ -11,7 +11,7 @@ namespace WPFEyes.Views
     /// </summary>
     public partial class Eye : UserControl
     {
-        private const int _maxOffset = 1000;
+        private const int _maxOffset = 2000;
         private readonly double _extension;
         private readonly double _extensionInnerEye;
         private readonly double _extensionBlue;
