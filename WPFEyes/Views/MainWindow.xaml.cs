@@ -1,7 +1,7 @@
-﻿namespace WPFEyes.View
-{
-    using System.Windows;
+﻿using System.Windows;
 
+namespace WPFEyes.Views
+{
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>

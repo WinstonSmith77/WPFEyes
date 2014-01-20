@@ -54,15 +54,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Win32.cs" />
-    <Page Include="View\Constants.xaml">
+    <Page Include="Views\Constants.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Eye.xaml">
+    <Page Include="Views\Eye.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -71,10 +71,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="View\Eye.xaml.cs">
+    <Compile Include="Views\Eye.xaml.cs">
       <DependentUpon>Eye.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>

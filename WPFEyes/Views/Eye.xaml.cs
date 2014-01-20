@@ -1,10 +1,10 @@
-﻿namespace WPFEyes.View
-{
-    using System;
-    using System.Windows;
-    using System.Windows.Controls;
-    using System.Windows.Threading;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Threading;
 
+namespace WPFEyes.Views
+{
     /// <summary>
     /// Interaction logic for Eye.xaml
     /// </summary>
