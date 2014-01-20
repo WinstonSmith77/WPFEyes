@@ -1,7 +1,7 @@
-﻿using System.Windows;
-
-namespace WPFEyes.UI
+﻿namespace WPFEyes.View
 {
+    using System.Windows;
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -9,7 +9,7 @@ namespace WPFEyes.UI
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
         }
     }
 }

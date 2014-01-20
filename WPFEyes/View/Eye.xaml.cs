@@ -1,10 +1,10 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Threading;
-
-namespace WPFEyes.UI
+﻿namespace WPFEyes.View
 {
+    using System;
+    using System.Windows;
+    using System.Windows.Controls;
+    using System.Windows.Threading;
+
     /// <summary>
     /// Interaction logic for Eye.xaml
     /// </summary>
@@ -17,32 +17,32 @@ namespace WPFEyes.UI
 
         public Eye()
         {
-            InitializeComponent();
-            DataContext = this;
+            this.InitializeComponent();
+            this.DataContext = this;
 
-            InitTimer();
+            this.InitTimer();
 
-            _extension = (double)FindResource("Extension");
-            Center = new Point(_extension / 2, _extension / 2);
+            this._extension = (double)this.FindResource("Extension");
+            this.Center = new Point(this._extension / 2, this._extension / 2);
 
-            _extensionInnerEye = (double)FindResource("ExtensionInnerEye");
-            OffsetXInnerEye = Center.X - _extensionInnerEye / 2;
-            OffsetYInnerEye = Center.Y - _extensionInnerEye / 2;
+            this._extensionInnerEye = (double)this.FindResource("ExtensionInnerEye");
+            this.OffsetXInnerEye = this.Center.X - this._extensionInnerEye / 2;
+            this.OffsetYInnerEye = this.Center.Y - this._extensionInnerEye / 2;
 
-            _extensionBlue = (double)FindResource("ExtensionBlue");
-            OffsetBlue = (_extensionInnerEye - _extensionBlue) / 2;
+            this._extensionBlue = (double)this.FindResource("ExtensionBlue");
+            this.OffsetBlue = (this._extensionInnerEye - this._extensionBlue) / 2;
         }
 
         private void InitTimer()
         {
             var timer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(50), IsEnabled = true};
-            timer.Tick += timer_Tick;
+            timer.Tick += this.timer_Tick;
         }
 
         void timer_Tick(object sender, EventArgs e)
         {
             var mouseOnScreen = Win32.GetMousePositionOnScreen();
-            var centerOnScreen = PointToScreen(Center);
+            var centerOnScreen = this.PointToScreen(this.Center);
 
             var offset = mouseOnScreen;
             offset.Offset(-centerOnScreen.X, -centerOnScreen.Y);
@@ -52,29 +52,29 @@ namespace WPFEyes.UI
 
             //  length = Math.Min(Math.Abs(length), _maxOffset) * Math.Sign(length);
 
-            length *= _extension / _maxOffset / 2;
+            length *= this._extension / _maxOffset / 2;
 
-            offset = CalcPos(angle, length, _extensionInnerEye, x => OffsetXInnerEye = x, y => OffsetYInnerEye = y);
+            offset = this.CalcPos(angle, length, this._extensionInnerEye, x => this.OffsetXInnerEye = x, y => this.OffsetYInnerEye = y);
 
-            Info = offset.ToString();
+            this.Info = offset.ToString();
         }
 
         private Point CalcPos(double angle, double length, double extension, Action<double> setX, Action<double> setY)
         {
-            length = Math.Min(Math.Abs(length), (_extension / 2 - extension)) * Math.Sign(length);
+            length = Math.Min(Math.Abs(length), (this._extension / 2 - extension)) * Math.Sign(length);
 
             var offset = new Point(Math.Cos(angle) * length, Math.Sin(angle) * length);
 
-            setX(Center.X + offset.X - extension / 2);
-            setY(Center.Y + offset.Y - extension / 2);
+            setX(this.Center.X + offset.X - extension / 2);
+            setY(this.Center.Y + offset.Y - extension / 2);
             return offset;
         }
 
 
         public Point Center
         {
-            get { return (Point)GetValue(CenterProperty); }
-            set { SetValue(CenterProperty, value); }
+            get { return (Point)this.GetValue(CenterProperty); }
+            set { this.SetValue(CenterProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Center.  This enables animation, styling, binding, etc...
@@ -85,8 +85,8 @@ namespace WPFEyes.UI
 
         public double OffsetBlue
         {
-            get { return (double)GetValue(OffsetBlueProperty); }
-            set { SetValue(OffsetBlueProperty, value); }
+            get { return (double)this.GetValue(OffsetBlueProperty); }
+            set { this.SetValue(OffsetBlueProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for OffsetBlue.  This enables animation, styling, binding, etc...
@@ -98,8 +98,8 @@ namespace WPFEyes.UI
 
         public double OffsetXInnerEye
         {
-            get { return (double)GetValue(OffsetXInnerEyeProperty); }
-            set { SetValue(OffsetXInnerEyeProperty, value); }
+            get { return (double)this.GetValue(OffsetXInnerEyeProperty); }
+            set { this.SetValue(OffsetXInnerEyeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for OffsetXInnerEye.  This enables animation, styling, binding, etc...
@@ -108,8 +108,8 @@ namespace WPFEyes.UI
 
         public double OffsetYInnerEye
         {
-            get { return (double)GetValue(OffsetYInnerEyeProperty); }
-            set { SetValue(OffsetYInnerEyeProperty, value); }
+            get { return (double)this.GetValue(OffsetYInnerEyeProperty); }
+            set { this.SetValue(OffsetYInnerEyeProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for OffsetXInnerEye.  This enables animation, styling, binding, etc...
@@ -122,8 +122,8 @@ namespace WPFEyes.UI
 
         public string Info
         {
-            get { return (string)GetValue(InfoProperty); }
-            set { SetValue(InfoProperty, value); }
+            get { return (string)this.GetValue(InfoProperty); }
+            set { this.SetValue(InfoProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Info.  This enables animation, styling, binding, etc...
