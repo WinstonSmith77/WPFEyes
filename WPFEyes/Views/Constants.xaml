@@ -5,4 +5,6 @@
     <sys:Double x:Key="Extension">100</sys:Double>
     <sys:Double x:Key="ExtensionInnerEye">20</sys:Double>
     <sys:Double x:Key="ExtensionBlue">7</sys:Double>
+    <sys:Double x:Key="ClipRadius">50</sys:Double>
+    <Point x:Key="ClipCenter">50,50</Point>
 </ResourceDictionary>

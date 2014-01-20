@@ -15,6 +15,14 @@ namespace WPFEyes.Views
         private readonly double _extensionInnerEye;
         private readonly double _extensionBlue;
 
+        private static readonly DispatcherTimer _timer;
+
+        static Eye()
+        {
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(20), IsEnabled = true };
+        }
+
+
         public Eye()
         {
             this.InitializeComponent();
@@ -35,8 +43,7 @@ namespace WPFEyes.Views
 
         private void InitTimer()
         {
-            var timer = new DispatcherTimer {Interval = TimeSpan.FromMilliseconds(50), IsEnabled = true};
-            timer.Tick += this.timer_Tick;
+            _timer.Tick += this.timer_Tick;
         }
 
         void timer_Tick(object sender, EventArgs e)
