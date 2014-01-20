@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Threading;
 
 namespace WPFEyes.Views
@@ -39,6 +40,8 @@ namespace WPFEyes.Views
 
             this._extensionBlue = (double)this.FindResource("ExtensionBlue");
             this.OffsetBlue = (this._extensionInnerEye - this._extensionBlue) / 2;
+
+            _mainWindow = Application.Current.MainWindow;
         }
 
         private void InitTimer()
@@ -138,5 +141,26 @@ namespace WPFEyes.Views
             DependencyProperty.Register("Info", typeof(string), typeof(Eye), new PropertyMetadata(String.Empty));
 
 
+        private double _startLeft;
+        private double _startTop;
+
+
+        private readonly Window _mainWindow;
+        
+
+        private void Thumb_DragStarted(object sender, DragStartedEventArgs e)
+        {
+            _startLeft = _mainWindow.Left;
+            _startTop = _mainWindow.Top;
+        }
+
+        private void Thumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            _mainWindow.Left = _startLeft + (e.HorizontalChange);
+            _mainWindow.Top = _startTop + (e.VerticalChange);
+
+            _startLeft = _mainWindow.Left;
+            _startTop = _mainWindow.Top;
+        }
     }
 }

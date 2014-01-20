@@ -32,9 +32,8 @@
                     </Ellipse.RenderTransform>
                 </Ellipse>
             </Canvas>
-            
-           
         </Canvas>
+        <Thumb DragStarted="Thumb_DragStarted"  DragDelta="Thumb_DragDelta"  Background="AliceBlue" Opacity=".01"/>
         <!--<TextBlock Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Path=Info}" ></TextBlock>-->
     </Grid>
 </UserControl>
