@@ -12,6 +12,16 @@ namespace WPFEyes.Views
         public MainWindow()
         {
             this.InitializeComponent();
+            ReadSettings();
+        }
+
+        private void ReadSettings()
+        {
+            var settings = Properties.Settings.Default;
+            Left = settings.Left;
+            Top = settings.Top;
+            Width = settings.Width;
+            Height = settings.Height;
         }
 
         private void MainWindow_OnPreviewMouseWheel(object sender, MouseWheelEventArgs e)
@@ -31,9 +41,50 @@ namespace WPFEyes.Views
 
             Height = Math.Max(defaultHeight, Height + delta * increment);
             Width = aspect * Height;
+
+            SaveSettings();
         }
 
 
+        private void MainWindow_OnPreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            SaveSettings();
+        }
+
+        private void SaveSettings()
+        {
+            var settings = Properties.Settings.Default;
+            var saveIt = false;
+
+            if (settings.Left != Left)
+            {
+                settings.Left = Left;
+                saveIt = true;
+            }
+
+            if (settings.Top != Top)
+            {
+                settings.Top = Top;
+                saveIt = true;
+            }
+
+            if (settings.Width != Width)
+            {
+                settings.Width = Width;
+                saveIt = true;
+            }
+
+            if (settings.Height != Height)
+            {
+                settings.Height = Height;
+                saveIt = true;
+            }
+
+            if (saveIt)
+            {
+                settings.Save();
+            }
+        }
     }
 
 
